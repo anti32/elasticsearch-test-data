@@ -127,7 +127,7 @@ def get_data_for_format(format):
         now = int(time.time())
         per_day = 24 * 60 * 60
         min = now - 30 * per_day if len(split_f) < 3 else int(split_f[2])
-        max = now + 30 * per_day if len(split_f) < 4 else int(split_f[3])
+        max = now + 0.01 * per_day if len(split_f) < 4 else int(split_f[3])
         ts = generate_count(min, max)
         return_val = int(ts * 1000) if field_type == "ts" else datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%dT%H:%M:%S.000-0000")
 
