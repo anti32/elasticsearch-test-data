@@ -64,6 +64,7 @@ def create_index(idx_name):
 
 @tornado.gen.coroutine
 def upload_batch(upload_data_txt):
+#   print(upload_data_txt)
     try:
         request = tornado.httpclient.HTTPRequest(tornado.options.options.es_url + "/_bulk",
                                                  method="POST",
@@ -261,8 +262,7 @@ def generate_test_data():
             logging.info("Loaded documents from the %s", tornado.options.options.data_file)
 
         for item in json_array:
-            cmd = {'index': {'_index': tornado.options.options.index_name,
-                             '_type': tornado.options.options.index_type}}
+            cmd = {'index': {'_index': tornado.options.options.index_name}}
             if '_id' in item:
                 cmd['index']['_id'] = item['_id']
 
@@ -281,8 +281,7 @@ def generate_test_data():
             if out_file:
                 out_file.write("%s\n" % json.dumps(item))
 
-            cmd = {'index': {'_index': tornado.options.options.index_name,
-                             '_type': tornado.options.options.index_type}}
+            cmd = {'index': {'_index': tornado.options.options.index_name}}
             if '_id' in item:
                 cmd['index']['_id'] = item['_id']
 
